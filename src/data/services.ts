@@ -235,6 +235,69 @@ export const services: Service[] = [
     ],
     ctaLabel: "Automate research",
     icon: FileSearch
+  },
+  {
+    slug: "ai-sales-agent",
+    title: "AI Sales Agent",
+    oneLiner: "Autonomous agent that qualifies leads and books meetings 24/7.",
+    outcomes: [
+      "3x more qualified leads in pipeline",
+      "Instant response to inbound inquiries",
+      "Personalized outreach at scale"
+    ],
+    integrations: ["HubSpot", "Salesforce", "LinkedIn", "Email", "Calendar", "Website chat"],
+    timeline: "2–3 weeks",
+    idealFor: "Sales teams wanting to scale outreach without adding headcount.",
+    deliverables: [
+      "Lead qualification chatbot",
+      "Automated meeting scheduling",
+      "CRM integration and logging",
+      "Performance analytics dashboard"
+    ],
+    ctaLabel: "Deploy sales agent",
+    icon: Users
+  },
+  {
+    slug: "customer-support-agent",
+    title: "Customer Support Agent",
+    oneLiner: "AI agent that resolves tickets, escalates intelligently, and learns from your knowledge base.",
+    outcomes: [
+      "70% of tickets resolved without human intervention",
+      "24/7 instant response times",
+      "Consistent, on-brand support"
+    ],
+    integrations: ["Zendesk", "Intercom", "Freshdesk", "Slack", "Email", "Knowledge bases"],
+    timeline: "2–3 weeks",
+    idealFor: "Support teams overwhelmed with repetitive questions.",
+    deliverables: [
+      "Multi-channel support bot",
+      "Smart escalation rules",
+      "Knowledge base integration",
+      "Sentiment analysis and reporting"
+    ],
+    ctaLabel: "Launch support agent",
+    icon: Mail
+  },
+  {
+    slug: "workflow-automation-agent",
+    title: "Workflow Automation Agent",
+    oneLiner: "Multi-step AI agent that executes complex business processes autonomously.",
+    outcomes: [
+      "Eliminate manual data entry and handoffs",
+      "Reduce process time by 80%",
+      "Error-free execution with audit trails"
+    ],
+    integrations: ["Zapier", "Make", "Google Workspace", "Microsoft 365", "ERP systems", "Custom APIs"],
+    timeline: "3–4 weeks",
+    idealFor: "Operations teams with repetitive multi-system workflows.",
+    deliverables: [
+      "Custom workflow automation",
+      "Decision logic configuration",
+      "Error handling and alerts",
+      "Process monitoring dashboard"
+    ],
+    ctaLabel: "Automate workflows",
+    icon: FileSearch
   }
 ];
 
