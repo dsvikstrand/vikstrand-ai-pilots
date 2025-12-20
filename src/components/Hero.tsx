@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar } from "lucide-react";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface HeroProps {
   onBookCall: () => void;
@@ -7,6 +8,8 @@ interface HeroProps {
 }
 
 export function Hero({ onBookCall, onRequestPilot }: HeroProps) {
+  const { t } = useLanguage();
+  
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-hero-bg">
       {/* Gradient mesh background */}
@@ -39,20 +42,20 @@ export function Hero({ onBookCall, onRequestPilot }: HeroProps) {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 text-sm font-medium rounded-full bg-primary/10 text-primary border border-primary/20">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            AI solutions for Swedish SMEs
+            {t.hero.badge}
           </div>
 
           {/* Headline */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground mb-6 animate-fade-in">
-            Practical AI that saves
+            {t.hero.headline1}
             <span className="block mt-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              time and cost
+              {t.hero.headline2}
             </span>
           </h1>
 
           {/* Subheadline */}
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 animate-fade-in" style={{ animationDelay: '0.1s' }}>
-            We deliver production-ready AI pilots in 1–3 weeks. Built on proven open-source patterns, customized for your data, security, and workflows.
+            {t.hero.subheadline}
           </p>
 
           {/* CTAs */}
@@ -63,7 +66,7 @@ export function Hero({ onBookCall, onRequestPilot }: HeroProps) {
               onClick={onBookCall}
             >
               <Calendar className="mr-2 h-5 w-5" />
-              Book a 20-min call
+              {t.hero.ctaBookCall}
             </Button>
             <Button 
               size="lg" 
@@ -71,14 +74,14 @@ export function Hero({ onBookCall, onRequestPilot }: HeroProps) {
               className="h-14 px-8 text-base font-semibold rounded-2xl border-2 hover:bg-primary/5 transition-all duration-300"
               onClick={onRequestPilot}
             >
-              Request a free AI pilot
+              {t.hero.ctaRequestPilot}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
 
           {/* Trust indicators */}
           <div className="mt-16 pt-8 border-t border-border/50">
-            <p className="text-sm text-muted-foreground mb-6">Trusted by forward-thinking Swedish companies</p>
+            <p className="text-sm text-muted-foreground mb-6">{t.hero.trustText}</p>
             <div className="flex items-center justify-center gap-8 opacity-40">
               {['Company A', 'Company B', 'Company C', 'Company D'].map((company) => (
                 <div key={company} className="text-lg font-semibold text-muted-foreground">

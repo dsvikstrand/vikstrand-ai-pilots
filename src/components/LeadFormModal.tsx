@@ -9,39 +9,16 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { submitLead, type LeadPayload } from "@/lib/leadSubmission";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, CheckCircle } from "lucide-react";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface LeadFormModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const dataSources = [
-  { id: "google-drive", label: "Google Drive" },
-  { id: "sharepoint", label: "SharePoint" },
-  { id: "onedrive", label: "OneDrive" },
-  { id: "sql", label: "SQL Database" },
-  { id: "erp", label: "ERP System" },
-  { id: "crm", label: "CRM" },
-  { id: "slack-teams", label: "Slack/Teams" },
-  { id: "other", label: "Other" },
-];
-
-const timelines = [
-  { value: "1-2-weeks", label: "1–2 weeks" },
-  { value: "1-month", label: "1 month" },
-  { value: "3-months", label: "3+ months" },
-];
-
-const budgetRanges = [
-  { value: "under-25k", label: "Under 25k SEK" },
-  { value: "25k-50k", label: "25k–50k SEK" },
-  { value: "50k-100k", label: "50k–100k SEK" },
-  { value: "over-100k", label: "Over 100k SEK" },
-  { value: "unsure", label: "Not sure yet" },
-];
-
 export function LeadFormModal({ isOpen, onClose }: LeadFormModalProps) {
   const { toast } = useToast();
+  const { t } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [formData, setFormData] = useState<LeadPayload>({
@@ -64,14 +41,14 @@ export function LeadFormModal({ isOpen, onClose }: LeadFormModalProps) {
       if (result.success) {
         setIsSuccess(true);
         toast({
-          title: "Request submitted!",
+          title: t.leadForm.toastSuccess,
           description: result.message,
         });
       }
     } catch (error) {
       toast({
-        title: "Something went wrong",
-        description: "Please try again or email us directly.",
+        title: t.leadForm.toastError,
+        description: t.leadForm.toastErrorMessage,
         variant: "destructive",
       });
     } finally {
@@ -111,12 +88,12 @@ export function LeadFormModal({ isOpen, onClose }: LeadFormModalProps) {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-6">
               <CheckCircle className="h-8 w-8" />
             </div>
-            <h3 className="text-2xl font-bold text-foreground mb-2">Thank you!</h3>
+            <h3 className="text-2xl font-bold text-foreground mb-2">{t.leadForm.successTitle}</h3>
             <p className="text-muted-foreground mb-6">
-              We've received your request and will be in touch within 24 hours.
+              {t.leadForm.successMessage}
             </p>
             <Button onClick={handleClose} className="rounded-xl">
-              Close
+              {t.leadForm.closeButton}
             </Button>
           </div>
         </DialogContent>
@@ -128,41 +105,41 @@ export function LeadFormModal({ isOpen, onClose }: LeadFormModalProps) {
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="max-w-xl max-h-[90vh] overflow-y-auto rounded-2xl">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold">Request a free AI pilot</DialogTitle>
+          <DialogTitle className="text-2xl font-bold">{t.leadForm.title}</DialogTitle>
           <DialogDescription>
-            Tell us about your needs and we'll design a pilot that proves value fast.
+            {t.leadForm.subtitle}
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-6 mt-4">
           <div className="grid sm:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Name *</Label>
+              <Label htmlFor="name">{t.leadForm.nameLabel} *</Label>
               <Input
                 id="name"
                 required
                 value={formData.name}
                 onChange={e => setFormData(prev => ({ ...prev, name: e.target.value }))}
                 className="rounded-xl"
-                placeholder="Your name"
+                placeholder={t.leadForm.namePlaceholder}
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="company">Company *</Label>
+              <Label htmlFor="company">{t.leadForm.companyLabel} *</Label>
               <Input
                 id="company"
                 required
                 value={formData.company}
                 onChange={e => setFormData(prev => ({ ...prev, company: e.target.value }))}
                 className="rounded-xl"
-                placeholder="Company name"
+                placeholder={t.leadForm.companyPlaceholder}
               />
             </div>
           </div>
 
           <div className="grid sm:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Email *</Label>
+              <Label htmlFor="email">{t.leadForm.emailLabel} *</Label>
               <Input
                 id="email"
                 type="email"
@@ -170,37 +147,37 @@ export function LeadFormModal({ isOpen, onClose }: LeadFormModalProps) {
                 value={formData.email}
                 onChange={e => setFormData(prev => ({ ...prev, email: e.target.value }))}
                 className="rounded-xl"
-                placeholder="you@company.com"
+                placeholder={t.leadForm.emailPlaceholder}
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="role">Role</Label>
+              <Label htmlFor="role">{t.leadForm.roleLabel}</Label>
               <Input
                 id="role"
                 value={formData.role}
                 onChange={e => setFormData(prev => ({ ...prev, role: e.target.value }))}
                 className="rounded-xl"
-                placeholder="Your role"
+                placeholder={t.leadForm.rolePlaceholder}
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="automationGoal">What do you want to automate? *</Label>
+            <Label htmlFor="automationGoal">{t.leadForm.automationGoalLabel} *</Label>
             <Textarea
               id="automationGoal"
               required
               value={formData.automationGoal}
               onChange={e => setFormData(prev => ({ ...prev, automationGoal: e.target.value }))}
               className="rounded-xl min-h-[100px]"
-              placeholder="Describe the task or workflow you'd like to improve with AI..."
+              placeholder={t.leadForm.automationGoalPlaceholder}
             />
           </div>
 
           <div className="space-y-3">
-            <Label>Data sources you use</Label>
+            <Label>{t.leadForm.dataSourcesLabel}</Label>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {dataSources.map(ds => (
+              {t.leadForm.dataSources.map(ds => (
                 <div key={ds.id} className="flex items-center space-x-2">
                   <Checkbox
                     id={ds.id}
@@ -216,14 +193,14 @@ export function LeadFormModal({ isOpen, onClose }: LeadFormModalProps) {
           </div>
 
           <div className="space-y-3">
-            <Label>Preferred timeline *</Label>
+            <Label>{t.leadForm.timelineLabel} *</Label>
             <RadioGroup
               required
               value={formData.timeline}
               onValueChange={value => setFormData(prev => ({ ...prev, timeline: value }))}
               className="flex flex-wrap gap-4"
             >
-              {timelines.map(tl => (
+              {t.leadForm.timelines.map(tl => (
                 <div key={tl.value} className="flex items-center space-x-2">
                   <RadioGroupItem value={tl.value} id={tl.value} />
                   <label htmlFor={tl.value} className="text-sm text-muted-foreground cursor-pointer">
@@ -235,13 +212,13 @@ export function LeadFormModal({ isOpen, onClose }: LeadFormModalProps) {
           </div>
 
           <div className="space-y-3">
-            <Label>Budget range (optional)</Label>
+            <Label>{t.leadForm.budgetLabel}</Label>
             <RadioGroup
               value={formData.budgetRange}
               onValueChange={value => setFormData(prev => ({ ...prev, budgetRange: value }))}
               className="flex flex-wrap gap-3"
             >
-              {budgetRanges.map(br => (
+              {t.leadForm.budgetRanges.map(br => (
                 <div key={br.value} className="flex items-center space-x-2">
                   <RadioGroupItem value={br.value} id={br.value} />
                   <label htmlFor={br.value} className="text-sm text-muted-foreground cursor-pointer">
@@ -258,7 +235,7 @@ export function LeadFormModal({ isOpen, onClose }: LeadFormModalProps) {
             disabled={isSubmitting}
           >
             {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            {isSubmitting ? "Submitting..." : "Submit request"}
+            {isSubmitting ? t.leadForm.submitting : t.leadForm.submitButton}
           </Button>
         </form>
       </DialogContent>

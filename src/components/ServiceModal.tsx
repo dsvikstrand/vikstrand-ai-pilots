@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, Clock, Users, Zap } from "lucide-react";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface ServiceModalProps {
   service: Service | null;
@@ -12,7 +13,11 @@ interface ServiceModalProps {
 }
 
 export function ServiceModal({ service, isOpen, onClose, onRequestPilot }: ServiceModalProps) {
+  const { t, st } = useLanguage();
+  
   if (!service) return null;
+
+  const serviceT = st[service.slug as keyof typeof st];
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -24,9 +29,9 @@ export function ServiceModal({ service, isOpen, onClose, onRequestPilot }: Servi
             </div>
             <Badge variant="outline">{service.timeline}</Badge>
           </div>
-          <DialogTitle className="text-2xl font-bold">{service.title}</DialogTitle>
+          <DialogTitle className="text-2xl font-bold">{serviceT?.title || service.title}</DialogTitle>
           <DialogDescription className="text-base">
-            {service.oneLiner}
+            {serviceT?.oneLiner || service.oneLiner}
           </DialogDescription>
         </DialogHeader>
 
@@ -35,10 +40,10 @@ export function ServiceModal({ service, isOpen, onClose, onRequestPilot }: Servi
           <div>
             <h4 className="flex items-center gap-2 font-semibold text-foreground mb-3">
               <Zap className="h-4 w-4 text-primary" />
-              Outcomes
+              {t.serviceModal.outcomes}
             </h4>
             <ul className="space-y-2">
-              {service.outcomes.map((outcome, i) => (
+              {(serviceT?.outcomes || service.outcomes).map((outcome, i) => (
                 <li key={i} className="flex items-start gap-3 text-muted-foreground">
                   <Check className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
                   {outcome}
@@ -51,10 +56,10 @@ export function ServiceModal({ service, isOpen, onClose, onRequestPilot }: Servi
           <div>
             <h4 className="flex items-center gap-2 font-semibold text-foreground mb-3">
               <Check className="h-4 w-4 text-primary" />
-              What you get
+              {t.serviceModal.whatYouGet}
             </h4>
             <ul className="grid grid-cols-2 gap-2">
-              {service.deliverables.map((item, i) => (
+              {(serviceT?.deliverables || service.deliverables).map((item, i) => (
                 <li key={i} className="text-sm text-muted-foreground bg-muted/50 px-3 py-2 rounded-lg">
                   {item}
                 </li>
@@ -64,7 +69,7 @@ export function ServiceModal({ service, isOpen, onClose, onRequestPilot }: Servi
 
           {/* Integrations */}
           <div>
-            <h4 className="font-semibold text-foreground mb-3">Integrates with</h4>
+            <h4 className="font-semibold text-foreground mb-3">{t.serviceModal.integratesWith}</h4>
             <div className="flex flex-wrap gap-2">
               {service.integrations.map((integration, i) => (
                 <Badge key={i} variant="secondary" className="font-normal">
@@ -78,18 +83,18 @@ export function ServiceModal({ service, isOpen, onClose, onRequestPilot }: Servi
           <div className="p-4 bg-muted/50 rounded-xl">
             <h4 className="flex items-center gap-2 font-semibold text-foreground mb-2">
               <Users className="h-4 w-4 text-primary" />
-              Ideal for
+              {t.serviceModal.idealFor}
             </h4>
-            <p className="text-sm text-muted-foreground">{service.idealFor}</p>
+            <p className="text-sm text-muted-foreground">{serviceT?.idealFor || service.idealFor}</p>
           </div>
 
           {/* Timeline */}
           <div className="p-4 border border-primary/20 bg-primary/5 rounded-xl">
             <div className="flex items-center gap-2 mb-1">
               <Clock className="h-4 w-4 text-primary" />
-              <span className="font-semibold text-foreground">Typical timeline</span>
+              <span className="font-semibold text-foreground">{t.serviceModal.typicalTimeline}</span>
             </div>
-            <p className="text-muted-foreground">{service.timeline} from kickoff to production</p>
+            <p className="text-muted-foreground">{service.timeline} {t.serviceModal.fromKickoff}</p>
           </div>
 
           {/* CTA */}
@@ -100,7 +105,7 @@ export function ServiceModal({ service, isOpen, onClose, onRequestPilot }: Servi
               onRequestPilot();
             }}
           >
-            {service.ctaLabel}
+            {serviceT?.ctaLabel || service.ctaLabel}
           </Button>
         </div>
       </DialogContent>

@@ -3,8 +3,10 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { Calculator, TrendingUp } from "lucide-react";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export function ROICalculator() {
+  const { t } = useLanguage();
   const [hoursSaved, setHoursSaved] = useState([10]);
   const [hourlyCost, setHourlyCost] = useState([500]);
 
@@ -29,24 +31,24 @@ export function ROICalculator() {
               <Calculator className="h-7 w-7" />
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Calculate your savings
+              {t.roi.title}
             </h2>
             <p className="text-lg text-muted-foreground">
-              See how much time and money you could save with AI automation.
+              {t.roi.subtitle}
             </p>
           </div>
 
           <Card className="rounded-2xl border-border/50 shadow-soft">
             <CardHeader>
-              <CardTitle className="text-xl">ROI Calculator</CardTitle>
+              <CardTitle className="text-xl">{t.roi.cardTitle}</CardTitle>
               <CardDescription>
-                Adjust the sliders to estimate your potential savings
+                {t.roi.cardSubtitle}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-8">
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <Label className="text-base">Hours saved per week</Label>
+                  <Label className="text-base">{t.roi.hoursSavedLabel}</Label>
                   <span className="text-2xl font-bold text-primary">{hoursSaved[0]}h</span>
                 </div>
                 <Slider
@@ -58,13 +60,13 @@ export function ROICalculator() {
                   className="py-2"
                 />
                 <p className="text-sm text-muted-foreground">
-                  Estimate time spent on tasks that could be automated
+                  {t.roi.hoursSavedHint}
                 </p>
               </div>
 
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <Label className="text-base">Average hourly cost (SEK)</Label>
+                  <Label className="text-base">{t.roi.hourlyCostLabel}</Label>
                   <span className="text-2xl font-bold text-primary">{hourlyCost[0]} kr</span>
                 </div>
                 <Slider
@@ -76,26 +78,26 @@ export function ROICalculator() {
                   className="py-2"
                 />
                 <p className="text-sm text-muted-foreground">
-                  Include salary, overhead, and opportunity cost
+                  {t.roi.hourlyCostHint}
                 </p>
               </div>
 
               <div className="pt-6 border-t border-border">
                 <div className="flex items-center gap-2 mb-4">
                   <TrendingUp className="h-5 w-5 text-primary" />
-                  <span className="font-semibold text-foreground">Estimated savings</span>
+                  <span className="font-semibold text-foreground">{t.roi.estimatedSavings}</span>
                 </div>
                 <div className="grid grid-cols-3 gap-4">
                   <div className="text-center p-4 bg-muted/50 rounded-xl">
-                    <p className="text-sm text-muted-foreground mb-1">Weekly</p>
+                    <p className="text-sm text-muted-foreground mb-1">{t.roi.weekly}</p>
                     <p className="text-xl font-bold text-foreground">{formatCurrency(weeklyValue)}</p>
                   </div>
                   <div className="text-center p-4 bg-primary/10 rounded-xl border border-primary/20">
-                    <p className="text-sm text-muted-foreground mb-1">Monthly</p>
+                    <p className="text-sm text-muted-foreground mb-1">{t.roi.monthly}</p>
                     <p className="text-2xl font-bold text-primary">{formatCurrency(monthlyValue)}</p>
                   </div>
                   <div className="text-center p-4 bg-muted/50 rounded-xl">
-                    <p className="text-sm text-muted-foreground mb-1">Yearly</p>
+                    <p className="text-sm text-muted-foreground mb-1">{t.roi.yearly}</p>
                     <p className="text-xl font-bold text-foreground">{formatCurrency(yearlyValue)}</p>
                   </div>
                 </div>
