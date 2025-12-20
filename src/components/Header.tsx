@@ -1,21 +1,24 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { useLanguage } from "@/i18n/LanguageContext";
+import { LanguageToggle } from "./LanguageToggle";
 
 interface HeaderProps {
   onBookCall: () => void;
 }
 
-const navLinks = [
-  { label: "Services", href: "#services" },
-  { label: "How it works", href: "#how-it-works" },
-  { label: "Security", href: "#security" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "FAQ", href: "#faq" },
-];
-
 export function Header({ onBookCall }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { t } = useLanguage();
+
+  const navLinks = [
+    { label: t.nav.services, href: "#services" },
+    { label: t.nav.howItWorks, href: "#how-it-works" },
+    { label: t.nav.security, href: "#security" },
+    { label: t.nav.pricing, href: "#pricing" },
+    { label: t.nav.faq, href: "#faq" },
+  ];
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border/50">
@@ -45,21 +48,25 @@ export function Header({ onBookCall }: HeaderProps) {
             ))}
           </nav>
 
-          {/* Desktop CTA */}
-          <div className="hidden md:block">
+          {/* Desktop CTA + Language Toggle */}
+          <div className="hidden md:flex items-center gap-2">
+            <LanguageToggle />
             <Button onClick={onBookCall} className="rounded-xl">
-              Book a call
+              {t.nav.bookCall}
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+          <div className="flex items-center gap-2 md:hidden">
+            <LanguageToggle />
+            <button
+              className="p-2"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
@@ -77,7 +84,7 @@ export function Header({ onBookCall }: HeaderProps) {
                 </a>
               ))}
               <Button onClick={() => { onBookCall(); setIsMenuOpen(false); }} className="w-full rounded-xl mt-2">
-                Book a call
+                {t.nav.bookCall}
               </Button>
             </nav>
           </div>

@@ -1,7 +1,10 @@
 import { Github, ExternalLink } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export function OpenSourceFoundation() {
+  const { t } = useLanguage();
+
   return (
     <section className="py-24 bg-background">
       <div className="container px-4 md:px-6">
@@ -14,21 +17,17 @@ export function OpenSourceFoundation() {
                 </div>
                 <div>
                   <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
-                    Built on open-source excellence
+                    {t.openSource.title}
                   </h2>
                   <p className="text-muted-foreground">
-                    Standing on the shoulders of giants
+                    {t.openSource.subtitle}
                   </p>
                 </div>
               </div>
 
               <div className="space-y-4 text-muted-foreground">
-                <p>
-                  Our solutions are built as <strong className="text-foreground">practical wrappers and tailored implementations</strong> of proven patterns from the open-source ecosystem. We often start from reference implementations curated in <strong className="text-foreground">awesome-ai-apps</strong> and adapt them to your data, tools, security requirements, and evaluation needs.
-                </p>
-                <p>
-                  This approach means you get battle-tested architectures with custom integrations, proper permissions, comprehensive evaluation, production monitoring, and polished UX—all delivered in weeks, not months.
-                </p>
+                <p dangerouslySetInnerHTML={{ __html: t.openSource.paragraph1 }} />
+                <p>{t.openSource.paragraph2}</p>
               </div>
 
               <a 
@@ -37,7 +36,7 @@ export function OpenSourceFoundation() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 mt-6 text-primary hover:underline font-medium"
               >
-                Explore awesome-ai-apps on GitHub
+                {t.openSource.linkText}
                 <ExternalLink className="h-4 w-4" />
               </a>
             </CardContent>

@@ -4,50 +4,26 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-
-const faqs = [
-  {
-    question: "Do you train AI models on our data?",
-    answer: "No. We use AI models through secure APIs with strict data handling policies. Your data is processed to generate responses but is never stored or used to train models. We can provide detailed data processing agreements on request."
-  },
-  {
-    question: "What systems can you integrate with?",
-    answer: "We integrate with most common business tools: Google Workspace, Microsoft 365 (SharePoint, OneDrive, Teams), Slack, major CRMs (HubSpot, Salesforce), SQL databases, ERPs, and many more. If you have a specific system, just ask."
-  },
-  {
-    question: "How long does a typical pilot take?",
-    answer: "Most pilots are delivered in 1–3 weeks. Simple solutions (document chat, basic monitoring) take 1–2 weeks. More complex integrations (CRM automation, multi-source RAG) typically take 2–3 weeks."
-  },
-  {
-    question: "How do you measure quality and success?",
-    answer: "Every solution includes built-in evaluation metrics. For Q&A systems, we track answer accuracy and citation quality. For automation, we measure time saved and error rates. We review metrics weekly during the pilot and monthly after deployment."
-  },
-  {
-    question: "Can we start with something small?",
-    answer: "Absolutely. In fact, we recommend it. Start with a single use case, prove the value, then expand. Our Starter package is designed exactly for this—minimal risk, clear outcomes."
-  },
-  {
-    question: "What happens after the pilot?",
-    answer: "You own the solution. We provide documentation, training, and handoff to your team. We offer ongoing support packages for monitoring, updates, and expansion, but there's no lock-in."
-  }
-];
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export function FAQ() {
+  const { t } = useLanguage();
+
   return (
     <section id="faq" className="py-24 bg-muted/30">
       <div className="container px-4 md:px-6">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Frequently asked questions
+              {t.faq.title}
             </h2>
             <p className="text-lg text-muted-foreground">
-              Everything you need to know about working with us.
+              {t.faq.subtitle}
             </p>
           </div>
 
           <Accordion type="single" collapsible className="space-y-4">
-            {faqs.map((faq, index) => (
+            {t.faq.items.map((faq, index) => (
               <AccordionItem 
                 key={index} 
                 value={`item-${index}`}

@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail } from "lucide-react";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface FooterProps {
   onBookCall: () => void;
@@ -7,6 +8,8 @@ interface FooterProps {
 }
 
 export function Footer({ onBookCall, onRequestPilot }: FooterProps) {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-foreground text-background py-16">
       <div className="container px-4 md:px-6">
@@ -20,7 +23,7 @@ export function Footer({ onBookCall, onRequestPilot }: FooterProps) {
               <span className="font-bold text-lg">Vikstrand Deep Solutions</span>
             </div>
             <p className="text-background/60 mb-6 max-w-sm">
-              Practical AI solutions for Swedish SMEs. We deliver production-ready pilots that prove value fast.
+              {t.footer.tagline}
             </p>
             <div className="flex gap-4">
               <a href="#" className="text-background/60 hover:text-background transition-colors">
@@ -37,26 +40,26 @@ export function Footer({ onBookCall, onRequestPilot }: FooterProps) {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-semibold mb-4">Quick links</h4>
+            <h4 className="font-semibold mb-4">{t.footer.quickLinks}</h4>
             <ul className="space-y-3">
               <li>
                 <a href="#services" className="text-background/60 hover:text-background transition-colors">
-                  Services
+                  {t.nav.services}
                 </a>
               </li>
               <li>
                 <a href="#how-it-works" className="text-background/60 hover:text-background transition-colors">
-                  How it works
+                  {t.nav.howItWorks}
                 </a>
               </li>
               <li>
                 <a href="#pricing" className="text-background/60 hover:text-background transition-colors">
-                  Pricing
+                  {t.nav.pricing}
                 </a>
               </li>
               <li>
                 <a href="#faq" className="text-background/60 hover:text-background transition-colors">
-                  FAQ
+                  {t.nav.faq}
                 </a>
               </li>
             </ul>
@@ -64,21 +67,21 @@ export function Footer({ onBookCall, onRequestPilot }: FooterProps) {
 
           {/* Get Started */}
           <div>
-            <h4 className="font-semibold mb-4">Get started</h4>
+            <h4 className="font-semibold mb-4">{t.footer.getStarted}</h4>
             <div className="space-y-3">
               <Button 
                 variant="secondary" 
                 className="w-full rounded-xl bg-background text-foreground hover:bg-background/90"
                 onClick={onBookCall}
               >
-                Book a call
+                {t.footer.bookCall}
               </Button>
               <Button 
                 variant="outline" 
                 className="w-full rounded-xl border-background/30 text-background hover:bg-background/10"
                 onClick={onRequestPilot}
               >
-                Request pilot
+                {t.footer.requestPilot}
               </Button>
             </div>
           </div>
@@ -87,9 +90,9 @@ export function Footer({ onBookCall, onRequestPilot }: FooterProps) {
         {/* Bottom */}
         <div className="pt-8 border-t border-background/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-background/50">
-            <p>© {new Date().getFullYear()} Vikstrand Deep Solutions. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Vikstrand Deep Solutions. {t.footer.copyright}</p>
             <p>
-              Built on proven open-source patterns (incl.{" "}
+              {t.footer.openSourceNote}{" "}
               <a 
                 href="https://github.com/Arindam200/awesome-ai-apps" 
                 target="_blank" 
@@ -98,11 +101,11 @@ export function Footer({ onBookCall, onRequestPilot }: FooterProps) {
               >
                 awesome-ai-apps
               </a>
-              ) — customized and productionized for your business.
+              {t.footer.customizedNote}
             </p>
           </div>
           <p className="text-center text-background/40 text-xs mt-4">
-            🇸🇪 Swedish version coming later.
+            {t.footer.swedishNote}
           </p>
         </div>
       </div>

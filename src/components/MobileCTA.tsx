@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Calendar, FileText } from "lucide-react";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface MobileCTAProps {
   onBookCall: () => void;
@@ -7,6 +8,8 @@ interface MobileCTAProps {
 }
 
 export function MobileCTA({ onBookCall, onRequestPilot }: MobileCTAProps) {
+  const { t } = useLanguage();
+
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-background/95 backdrop-blur-lg border-t border-border p-4">
       <div className="flex gap-3">
@@ -15,7 +18,7 @@ export function MobileCTA({ onBookCall, onRequestPilot }: MobileCTAProps) {
           onClick={onBookCall}
         >
           <Calendar className="mr-2 h-4 w-4" />
-          Book call
+          {t.mobileCta.bookCall}
         </Button>
         <Button 
           variant="outline"
@@ -23,7 +26,7 @@ export function MobileCTA({ onBookCall, onRequestPilot }: MobileCTAProps) {
           onClick={onRequestPilot}
         >
           <FileText className="mr-2 h-4 w-4" />
-          Free pilot
+          {t.mobileCta.freePilot}
         </Button>
       </div>
     </div>
