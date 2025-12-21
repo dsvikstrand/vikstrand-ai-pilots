@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -11,13 +12,17 @@ interface HeaderProps {
 export function Header({ onBookCall }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { t } = useLanguage();
+  const location = useLocation();
+
+  const isProductsPage = location.pathname === "/products";
 
   const navLinks = [
-    { label: t.nav.services, href: "#services" },
-    { label: t.nav.howItWorks, href: "#how-it-works" },
-    { label: t.nav.security, href: "#security" },
-    { label: t.nav.pricing, href: "#pricing" },
-    { label: t.nav.faq, href: "#faq" },
+    { label: t.nav.products, href: "/products", isRoute: true },
+    { label: t.nav.services, href: isProductsPage ? "/#services" : "#services", isRoute: isProductsPage },
+    { label: t.nav.howItWorks, href: isProductsPage ? "/#how-it-works" : "#how-it-works", isRoute: isProductsPage },
+    { label: t.nav.security, href: isProductsPage ? "/#security" : "#security", isRoute: isProductsPage },
+    { label: t.nav.pricing, href: isProductsPage ? "/#pricing" : "#pricing", isRoute: isProductsPage },
+    { label: t.nav.faq, href: isProductsPage ? "/#faq" : "#faq", isRoute: isProductsPage },
   ];
 
   return (
@@ -38,13 +43,23 @@ export function Header({ onBookCall }: HeaderProps) {
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-6">
             {navLinks.map(link => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {link.label}
-              </a>
+              link.isRoute ? (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {link.label}
+                </a>
+              )
             ))}
           </nav>
 
@@ -74,14 +89,25 @@ export function Header({ onBookCall }: HeaderProps) {
           <div className="md:hidden py-4 border-t border-border/50">
             <nav className="flex flex-col gap-4">
               {navLinks.map(link => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {link.label}
-                </a>
+                link.isRoute ? (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                )
               ))}
               <Button onClick={() => { onBookCall(); setIsMenuOpen(false); }} className="w-full rounded-xl mt-2">
                 {t.nav.bookCall}

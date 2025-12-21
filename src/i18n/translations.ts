@@ -4,6 +4,7 @@ export const translations = {
   en: {
     // Header
     nav: {
+      products: "Products",
       services: "Services",
       howItWorks: "How it works",
       security: "Security",
@@ -276,10 +277,23 @@ export const translations = {
       bookCall: "Book call",
       freePilot: "Free pilot",
     },
+    // Products
+    products: {
+      badge: "6 AI Products",
+      title: "Ready-to-use AI products",
+      subtitle: "Self-serve products with transparent pricing. Start immediately with a free trial.",
+      buyNow: "Buy Now",
+      tryFree: "Start Free Trial",
+      learnMore: "Learn more",
+      features: "What's included",
+      subscriptionNote: "Billed monthly. Cancel anytime.",
+      oneTimeNote: "One-time purchase. Lifetime access.",
+    },
   },
   sv: {
     // Header
     nav: {
+      products: "Produkter",
       services: "Tjänster",
       howItWorks: "Så fungerar det",
       security: "Säkerhet",
@@ -551,6 +565,18 @@ export const translations = {
     mobileCta: {
       bookCall: "Boka samtal",
       freePilot: "Gratis pilot",
+    },
+    // Products
+    products: {
+      badge: "6 AI-produkter",
+      title: "Färdiga AI-produkter",
+      subtitle: "Självbetjäningsprodukter med transparent prissättning. Börja direkt med en gratis provperiod.",
+      buyNow: "Köp nu",
+      tryFree: "Starta gratis provperiod",
+      learnMore: "Läs mer",
+      features: "Vad ingår",
+      subscriptionNote: "Faktureras månadsvis. Avsluta när som helst.",
+      oneTimeNote: "Engångsköp. Livstidsåtkomst.",
     },
   },
 } as const;
@@ -1001,6 +1027,158 @@ export const serviceTranslations = {
         "Dashboard för processövervakning"
       ],
       ctaLabel: "Automatisera arbetsflöden",
+    },
+  },
+} as const;
+
+// Product translations
+export const productTranslations = {
+  en: {
+    "invoice-receipt-ocr": {
+      title: "Invoice & Receipt OCR",
+      tagline: "Auto-extract data from invoices and receipts with 99% accuracy.",
+      features: [
+        "Batch upload support",
+        "Multi-language recognition",
+        "Export to Excel/CSV",
+        "Fortnox integration ready",
+        "99%+ accuracy guarantee"
+      ],
+      ctaLabel: "Get Started",
+    },
+    "meeting-transcriber": {
+      title: "Meeting Transcriber",
+      tagline: "Audio to transcript with AI-generated summaries and action items.",
+      features: [
+        "Swedish & English support",
+        "Speaker identification",
+        "Automatic action items",
+        "Searchable archive",
+        "Export to your tools"
+      ],
+      ctaLabel: "Start Transcribing",
+    },
+    "cv-screener": {
+      title: "CV Screener",
+      tagline: "Ranked candidate summaries from batch CV uploads.",
+      features: [
+        "Bulk CV processing",
+        "Custom criteria matching",
+        "Ranking & scoring",
+        "Skills extraction",
+        "Bias-aware screening"
+      ],
+      ctaLabel: "Screen CVs",
+    },
+    "email-classifier": {
+      title: "Email Classifier & Auto-Responder",
+      tagline: "Intelligent email categorization with smart auto-replies.",
+      features: [
+        "Multi-category classification",
+        "Priority detection",
+        "Auto-draft responses",
+        "Outlook & Gmail integration",
+        "Custom rules engine"
+      ],
+      ctaLabel: "Classify Emails",
+    },
+    "churn-predictor": {
+      title: "Customer Churn Predictor",
+      tagline: "Risk scoring from CRM data to retain your best customers.",
+      features: [
+        "CRM data integration",
+        "Risk score dashboard",
+        "Early warning alerts",
+        "Retention recommendations",
+        "Monthly trend reports"
+      ],
+      ctaLabel: "Predict Churn",
+    },
+    "fortnox-chat": {
+      title: "Fortnox Chat Assistant",
+      tagline: "Natural language queries for your Fortnox accounting data.",
+      features: [
+        "Plain Swedish queries",
+        "Real-time Fortnox sync",
+        "Financial insights",
+        "Report generation",
+        "Secure API connection"
+      ],
+      ctaLabel: "Chat with Fortnox",
+    },
+  },
+  sv: {
+    "invoice-receipt-ocr": {
+      title: "Faktura- & kvitto-OCR",
+      tagline: "Extrahera automatiskt data från fakturor och kvitton med 99% noggrannhet.",
+      features: [
+        "Batchuppladdning",
+        "Flerspråkig igenkänning",
+        "Export till Excel/CSV",
+        "Fortnox-integration redo",
+        "99%+ noggrannhetsgaranti"
+      ],
+      ctaLabel: "Kom igång",
+    },
+    "meeting-transcriber": {
+      title: "Mötestranskriberare",
+      tagline: "Ljud till transkription med AI-genererade sammanfattningar och åtgärdspunkter.",
+      features: [
+        "Svenska & engelska stöd",
+        "Talaridentifiering",
+        "Automatiska åtgärdspunkter",
+        "Sökbart arkiv",
+        "Export till dina verktyg"
+      ],
+      ctaLabel: "Börja transkribera",
+    },
+    "cv-screener": {
+      title: "CV-granskare",
+      tagline: "Rankade kandidatsammanfattningar från batch-CV-uppladdningar.",
+      features: [
+        "Mass-CV-behandling",
+        "Anpassade kriteriumatchning",
+        "Rankning & poängsättning",
+        "Kompetensextraktion",
+        "Partiskhetsvänlig granskning"
+      ],
+      ctaLabel: "Granska CV:n",
+    },
+    "email-classifier": {
+      title: "E-postklassificerare & autoresponder",
+      tagline: "Intelligent e-postkategorisering med smarta autosvar.",
+      features: [
+        "Multikategoriklassificering",
+        "Prioritetsdetektering",
+        "Automatiska svarsutkast",
+        "Outlook & Gmail-integration",
+        "Anpassad regelmotor"
+      ],
+      ctaLabel: "Klassificera e-post",
+    },
+    "churn-predictor": {
+      title: "Kundavgångsprediktor",
+      tagline: "Riskpoäng från CRM-data för att behålla dina bästa kunder.",
+      features: [
+        "CRM-dataintegration",
+        "Riskpoäng-dashboard",
+        "Tidiga varningsvarningar",
+        "Retentionsrekommendationer",
+        "Månadsvis trendrapporter"
+      ],
+      ctaLabel: "Förutse avgång",
+    },
+    "fortnox-chat": {
+      title: "Fortnox chattassistent",
+      tagline: "Naturligt språk-frågor för dina Fortnox bokföringsdata.",
+      features: [
+        "Vanliga svenska frågor",
+        "Realtids Fortnox-synk",
+        "Finansiella insikter",
+        "Rapportgenerering",
+        "Säker API-anslutning"
+      ],
+      ctaLabel: "Chatta med Fortnox",
     },
   },
 } as const;
