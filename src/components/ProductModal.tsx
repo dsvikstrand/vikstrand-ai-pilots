@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { productTranslations } from "@/i18n/translations";
+import { ProductDemo } from "@/components/ProductDemo";
 
 interface ProductModalProps {
   product: Product | null;
@@ -12,10 +14,11 @@ interface ProductModalProps {
 }
 
 export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
-  const { t, pt } = useLanguage();
+  const { t, language } = useLanguage();
   
   if (!product) return null;
 
+  const pt = productTranslations[language];
   const productT = pt[product.slug as keyof typeof pt];
 
   return (
@@ -37,6 +40,9 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
         </DialogHeader>
 
         <div className="space-y-6 mt-4">
+          {/* Interactive Demo */}
+          <ProductDemo productSlug={product.slug} />
+
           {/* Pricing */}
           <div className="p-4 border border-primary/20 bg-primary/5 rounded-xl text-center">
             <div className="flex items-baseline justify-center gap-1">

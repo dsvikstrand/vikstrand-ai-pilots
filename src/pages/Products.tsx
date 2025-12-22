@@ -2,7 +2,13 @@ import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { MobileCTA } from "@/components/MobileCTA";
+import { ProductsHero } from "@/components/ProductsHero";
 import { ProductsGrid } from "@/components/ProductsGrid";
+import { ProductsComparison } from "@/components/ProductsComparison";
+import { ProductsHowItWorks } from "@/components/ProductsHowItWorks";
+import { ProductsValueProps } from "@/components/ProductsValueProps";
+import { ProductsTestimonials } from "@/components/ProductsTestimonials";
+import { ProductsFAQ } from "@/components/ProductsFAQ";
 import { ProductModal } from "@/components/ProductModal";
 import { LeadFormModal } from "@/components/LeadFormModal";
 import { type Product } from "@/data/products";
@@ -25,6 +31,10 @@ const Products = () => {
     setIsLeadFormOpen(true);
   };
 
+  const scrollToProducts = () => {
+    document.getElementById("products-grid")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <>
       <title>Products | Vikstrand Deep Solutions</title>
@@ -32,7 +42,15 @@ const Products = () => {
       <Header onBookCall={handleBookCall} />
       
       <main className="pt-16 pb-24 md:pb-0">
-        <ProductsGrid onProductClick={handleProductClick} />
+        <ProductsHero onBrowseProducts={scrollToProducts} />
+        <div id="products-grid">
+          <ProductsGrid onProductClick={handleProductClick} />
+        </div>
+        <ProductsComparison onProductClick={handleProductClick} />
+        <ProductsHowItWorks />
+        <ProductsValueProps />
+        <ProductsTestimonials />
+        <ProductsFAQ />
       </main>
 
       <Footer onBookCall={handleBookCall} onRequestPilot={handleRequestPilot} />
