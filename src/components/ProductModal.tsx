@@ -15,7 +15,7 @@ interface ProductModalProps {
 // Product descriptions with use cases, applications, benefits, and tips
 const productDescriptions = {
   en: {
-    "invoice-ocr": {
+    "invoice-receipt-ocr": {
       useCases: ["Monthly bookkeeping", "Expense reports", "Audit preparation", "VAT reconciliation"],
       applications: "Upload 100+ receipts and get structured data in minutes. Auto-extract vendor, amount, date, VAT, and more. Perfect for accountants and finance teams who want to eliminate manual data entry.",
       benefits: ["Eliminates manual data entry", "Reduces errors by 95%", "Saves 10+ hours per month", "Supports Swedish receipts with moms extraction"],
@@ -53,7 +53,7 @@ const productDescriptions = {
     }
   },
   sv: {
-    "invoice-ocr": {
+    "invoice-receipt-ocr": {
       useCases: ["Månadsavslut", "Kvittohantering", "Revisionsförberedelse", "Momsavstämning"],
       applications: "Ladda upp 100+ kvitton och få strukturerad data på minuter. Auto-extrahera leverantör, belopp, datum, moms och mer. Perfekt för ekonomer och finansteam som vill eliminera manuell datainmatning.",
       benefits: ["Eliminerar manuell datainmatning", "Minskar fel med 95%", "Sparar 10+ timmar per månad", "Stöder svenska kvitton med momsutläsning"],
