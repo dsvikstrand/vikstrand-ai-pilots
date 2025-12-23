@@ -22,7 +22,7 @@ export function MobileCTA({ onBookCall, onRequestPilot }: MobileCTAProps) {
         </Button>
         <Button 
           variant="outline"
-          className="flex-1 h-12 rounded-xl font-semibold"
+          className="flex-1 h-12 rounded-xl font-semibold border-primary text-primary hover:bg-primary hover:text-primary-foreground"
           onClick={onRequestPilot}
         >
           <FileText className="mr-2 h-4 w-4" />

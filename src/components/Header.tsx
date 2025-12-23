@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -13,8 +13,28 @@ export function Header({ onBookCall }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { t } = useLanguage();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const isProductsPage = location.pathname === "/products";
+
+  // Handle hash scroll after navigation
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.querySelector(location.hash);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    }
+  }, [location]);
+
+  const handleNavClick = (href: string, isRoute: boolean) => {
+    if (isRoute && href.startsWith("/#")) {
+      // Navigate to home page and then scroll to section
+      navigate("/" + href.substring(1));
+    }
+  };
 
   const navLinks = [
     { label: t.nav.products, href: "/products", isRoute: true },
@@ -40,13 +60,13 @@ export function Header({ onBookCall }: HeaderProps) {
             <span className="font-bold text-foreground sm:hidden">VDS</span>
           </a>
 
-          {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-6">
             {navLinks.map(link => (
               link.isRoute ? (
                 <Link
                   key={link.href}
                   to={link.href}
+                  onClick={() => handleNavClick(link.href, link.isRoute)}
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {link.label}
@@ -94,7 +114,7 @@ export function Header({ onBookCall }: HeaderProps) {
                     key={link.href}
                     to={link.href}
                     className="text-muted-foreground hover:text-foreground transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => { handleNavClick(link.href, link.isRoute); setIsMenuOpen(false); }}
                   >
                     {link.label}
                   </Link>
